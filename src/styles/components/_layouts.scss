@@ -1,0 +1,83 @@
+.MessageBox{
+    position: fixed;
+    z-index: 100;
+    bottom: 1em;
+    right: 1em;
+    max-width: 18em;
+    padding: .1em .7em;
+    display: flex;
+    align-items: center;
+    gap: .7em;
+    transform: translateX(150%);
+    transition: transform .5s ease-in;
+
+    &--active{ transform: translateX(0) }
+    &--ERROR{ background-color: rgba(175, 91, 91, 0.788) }
+    &--OK{ background-color: rgba(96, 173, 96, 0.726) }
+
+    &__icon{ font-size: 3em; color: #000 }
+    &__message{ font-size: .9em; color: #000 }
+}
+
+.ErrorFindVehicles{
+    margin-top: 5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__span{
+        text-align: center;
+        font-size: 1.4em;
+    }
+    &__link{
+        border: .03em solid $primary-color;
+        color: $primary-color;
+        padding: .5em;
+
+        & svg{ vertical-align: text-top }
+    }
+}
+
+.ContainerBoxes{
+
+    &__box{
+        max-height: 90%;
+        padding: 3em 1em 1em 1em;
+        @include flex(baseline, center, column);
+        background-color: $background-color;
+
+        width: 80%;
+        position: relative;
+        overflow-y: scroll;
+        transform: scale(.05);
+        transition: transform .3s ease-in;
+        &--active{ transform: scale(1) }
+    }
+    
+    &__loadingContainer{
+        width: 80%;
+        height: 90%;
+        background-color: $background-color;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        @include flex(center,center,row);
+        gap: .7em;
+
+        display: none;
+        &--active{ display: flex; }
+    }
+    &__circleLoading{
+        width: 2em;
+        height: 2em;
+        background-color: #6d6d6d;
+        border-radius: 50%;
+        animation: circleAnimation;
+        animation-duration: 1.2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in;
+    }
+    &__circleLoading:nth-child(2){ animation-delay: .1s }
+    &__circleLoading:nth-child(3){ animation-delay: .25s }
+}

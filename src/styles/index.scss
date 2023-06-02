@@ -1,0 +1,318 @@
+//---- Settings
+    @import 'settings/variables';
+
+//---- Utils
+    @import 'utils/keyframes';
+    @import 'utils/mixins-function';
+
+//---- Components
+    @import 'components/layouts';
+    @import 'components/buttons';
+
+//---- Generics
+    @import 'generics/reset';
+
+
+//------------------------------------
+//------------- HEADER ---------------
+//------------------------------------
+.Header{
+    @include flex(space-between, center);
+    background-color: #000;
+    padding: 0 1.5em 0 0;
+    top: 0;
+
+    &__image{ width: 10em }
+    &__option{
+        border: .03em solid #fff;
+        color: #fff;
+        padding: .5em;
+
+        &:nth-child(2){ margin-left: 2em }
+        & svg{ vertical-align: text-top }
+    }
+}
+
+//------------------------------------
+//------------- MAIN -----------------
+//------------------------------------
+.Main{ @include grid(20% 80%, 1fr , center, flex-start) }
+
+//--------------------------------------------------------------------------------------
+//--------------------------------- VEHICLES SECTION -----------------------------------
+//--------------------------------------------------------------------------------------
+.Main__containerVehicles{
+    @include grid(repeat(auto-fit, minmax(17em,17em)), 1fr 1fr );
+    gap: 1em 1.5em;
+    padding: 1.5em 1em;
+}
+
+//--------------------------- FILTERS
+.FiltersContainer{
+    @include flex(flex-start, top, column);
+    gap: 1em;
+    margin-top: 1em;
+    padding-left: 1em;
+    height: fit-content ;
+
+    &__select{ font-size: 1.2em; outline: none; width: 100% }
+
+    &__checkboxContainer{ margin-left: .5em }
+    &__checkboxContainer--sold{ margin-left: 0 }
+    
+    &__submitFilters{ cursor: pointer }
+}
+
+//---------------------- VEHICLE CARD
+.Vehicle{ 
+    border: .02em solid $secundary-color; 
+
+    &__imageContainer{ height: 10.2em; position: relative }
+    &__img{ width: 100%; height: 100%; object-fit:cover; user-select: none }
+    
+    &__model, &__type{
+        position: absolute;
+        right: -.5em;
+        background-color: $primary-color;
+        color: $tertiary-color;
+        padding: .3em .5em;
+        font-weight: 700;
+        box-shadow: -1px 1px 5px rgba(0,0,0,0.5);
+    }
+    &__model{ top: -.5em }
+    &__type{ top: 2.2em }
+    
+    &__info{ 
+        @include flex(space-between); 
+        padding: 0 .8em; 
+        font-size: 1.2em; 
+        margin-top: .2em; 
+        color: $info-color;
+    }
+    &__name{ 
+        margin: .4em auto; 
+        text-align: center; 
+        font-size: 1.5em; 
+        cursor: pointer;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 90%;
+        overflow: hidden 
+    }
+    &__name a{  color: #fff }
+    &__name:hover{ text-decoration: underline }
+}
+
+//-------------------------- HANDLER PAGES
+.HandlerPages{ 
+    grid-column: 3 span;
+    @include flex();
+    gap: .5em;
+
+    &__span{ font-size: 1.8em }
+    &__span svg{
+        vertical-align: text-top;
+        cursor: pointer;
+    }
+}
+
+//---------------------------------------------------------------------------------
+//------------------------------ BOXES CONTAINER-----------------------------------
+//---------------------------------------------------------------------------------
+.ContainerBoxes{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.4);
+    width: 100%;
+    height: 100%;
+    @include flex();
+}
+
+//------------------------- UPLOAD FORM BOX
+.UploadForm{
+
+    &__form{
+        @include grid(repeat(4, 10em) , 7em repeat(6, 3em) 5em 2.5em , center, top);
+        row-gap: 2em;
+        column-gap: 1em;
+    }
+
+    //-------- Edit Box -------
+        &__form--edit{ grid-template-rows: repeat(6, 3em) 5em 2.5em }
+        &__div--edit{ display: flex; gap: .7em; align-items: flex-start; margin-bottom: 2em }
+        &__image--edit{ width: 5em; box-shadow: -1px 1px 7px rgba(0,0,0,0.8) }
+    //-------------------------
+
+    &__inputContainer{ position: relative; grid-column: 2 span }
+    &__inputContainer input, &__inputContainer textarea, &__inputContainer select{ 
+      width: 100%; 
+      padding: 1em;
+      background-color: $background-color;
+      outline: none;
+      border: .1em solid $input-color;
+      border-radius: .6em;
+    }
+    &__inputContainer textarea{ resize: none; height: 100% }
+    &__label{
+        position: absolute;
+        top: 70%;
+        background-color: $background-color;
+        padding: .2em;
+        transform-origin: left;
+        transform: translate(.5em,-90%);
+        transition: transform .2s ease-in-out;
+        color: $input-color;
+
+        &--textarea{ top: 40% }
+        &--active{ transform: translate(.7em, -3em)  scale(.8) }
+    }
+
+    &__submitButton{ grid-column: 4 span; cursor: pointer }
+    
+    /*----------  Images ----------*/
+    &__inputImageContainer{ 
+      grid-column: 1 span; 
+      background-color: $background-color;
+      @include flex();
+      border-radius: .3em;
+      
+      & > input{ display: none }
+    }
+    
+    &__previewImageContainer{ 
+        position: relative; 
+        height: 100%; 
+        width: 100%; 
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.8);
+    }
+
+    &__labelImage{
+        background-color: $tertiary-color; 
+        padding: .5em;
+        vertical-align: text-top;
+        border-radius: 1em;
+        cursor: pointer;
+      
+        &--active{
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            padding: 0;
+            @include flex()
+        }
+
+        &:hover{ opacity: .7 }
+    }
+
+    &__previewImage{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    &__inputImagesContainer{ grid-column: 3 span; margin-left: 2em; align-self: center }
+    
+    /*---------------CONFIG */
+    &__inputExtraContainer{ grid-column: 4 span }
+
+    &__inputContainer--radio{ 
+      @include flex();
+
+      & input{ width: fit-content; margin: 10px }
+    }
+}
+
+//------------------------- VEHICLE BOX
+//------------------------------------------
+.VehicleBox{
+
+    //-------------------- Image section
+    &__imagesContainer{
+        width: 90%;
+        height: 30em;
+        position: relative;
+        user-select: none;
+    }
+    &__arrow{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2.5em;
+        background-color: $tertiary-color;
+        cursor: pointer;
+    
+        &--left{ left: 0 }
+        &--right{ right: 0 }
+    }
+    &__image{
+        width: 100%;
+        height: 100%;
+
+        & img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+    &__downloadImage{
+        position: absolute;
+        color: #fff;
+        left: 8em;
+    }
+
+    //------------------------ Main data
+    &__mainDataContainer{
+        display: grid;
+        width: 50%;
+        grid-template-columns: 1fr 1fr;
+        gap: .5em 1em;
+    }
+    &__mainData{
+        border-bottom: #6d6d6d 2px solid;
+    }
+
+    //------------------------- Extra data
+    &__h3{ width: 50%; margin-top: 2em; margin-bottom: .5em }
+    &__extraDataContainer{
+        width: 50%;
+        display: grid;
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5em 1.5em;
+    }
+    &__extraData svg{ vertical-align: text-top; margin-right: .3em }
+    &__extraData--error{
+        display: flex;
+        align-items: center;
+        gap: .2em;
+        width: 45%;
+    }
+
+    //------------------------- Bottom section
+    &__bottomContainer{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 3em;
+        width: 50%;
+    }
+    
+    &__option{
+        border: .03em solid $primary-color;
+        color: $primary-color;
+        padding: .5em;
+
+        &:nth-child(2), &:nth-child(3){ margin-left: 1em; }
+    }
+    &__price{
+        font-weight: 800;
+        background-color: $tertiary-color;
+        padding: .5em;
+    }  
+    &__soldMessage{ font-weight: 700;  font-size: 1.7em; color: $info-color }
+}
