@@ -2,10 +2,8 @@
 import { Outlet } from "react-router-dom";
 import { MessageBox, Header } from "@/components";
 
-//----- Context
-
 //----- Components
-
+import { Filters } from "./components";
 
 export default function MainLayout(){
 
@@ -14,7 +12,7 @@ export default function MainLayout(){
           <Header />
     
           <main className='Main'>
-              {/* <Filters /> */}
+              <Filters />
               {/* <VehiclesSection /> */}
 
               <Outlet /> {/* Here the boxes are loaded  */}
