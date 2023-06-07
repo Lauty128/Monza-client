@@ -26,7 +26,7 @@ export function Page(){
                 <FaAngleLeft/>
             </span> : ""}
             <span className='HandlerPages__span'>{pagination.page + 1}</span>
-            { (pagination.page * pagination.size) < pagination.total ? 
+            { ((pagination.page + 1) * pagination.size) < pagination.total ? 
             <span className='HandlerPages__span' onClick={()=> handlerPage(1)}>
                 <FaAngleRight/>
             </span> : ""}
