@@ -5,13 +5,16 @@
     import { MdRestartAlt } from 'react-icons/md'
 
 //----- Models
-    import { filtersInterface } from '@/models'
+    import { filtersInterface, marksInterface } from '@/models'
 
 //----- States
     import { useComplementaryStore } from '@/store/complementaryStore'
 
 //----- Services
     import { get_marks, get_users } from '@/services/data.service'
+
+//----- Services
+    import { store_time_controller, clear_local_store } from '@/utils/localStorage'
 
 
 export function Filters(){
@@ -24,12 +27,20 @@ export function Filters(){
     const formRef = useRef(null)
     
     useEffect(()=>{
+
+        if(!store_time_controller('marks_list')){ clear_local_store('marks_list') }
+        if(!store_time_controller('users_list')){ clear_local_store('users_list') }
+
         (async()=>{
             //---- Marks and Users data defined
-            const marksData = await get_marks()
+            const marksData:marksInterface[] = localStorage.getItem('marks_list')
+            ? JSON.parse(localStorage.getItem('marks_list') || "")
+            : await get_marks()
             stateChanges.setMarks(marksData)
 
-            const usersData = await get_users()
+            const usersData = localStorage.getItem('users_list')
+            ? JSON.parse(localStorage.getItem('users_list') || "")
+            : await get_users()
             stateChanges.setUsers(usersData)
         })()
     }, [])
@@ -59,8 +70,6 @@ export function Filters(){
     //------- Form Handler
     async function submitHandler(e:FormEvent<HTMLFormElement>){
         e.preventDefault()
-        console.log('Nuevos Filtros subidos');
-        console.log(localFilters);
         //setFilters(localFilters)
     }
     
@@ -90,16 +99,18 @@ export function Filters(){
                 </select>
             </div>
 
-            <select name="mark"  className='FiltersContainer__select' onChange={e=> filtersChange(e.target)}>
-                <option value="">Marca</option>
                 {
                     marks
-                    ?   marks.map(mark=>{
-                        return <option key={mark.id_mark} value={mark.id_mark}>{mark.name}</option>
-                    })
-                    : ''
+                    ?   <select name="mark"  className='FiltersContainer__select' onChange={e=> filtersChange(e.target)}>
+                            <option value="">Marca</option>
+                            {
+                                marks.map(mark=>{
+                                    return <option key={mark.id_mark} value={mark.id_mark}>{mark.name}</option>
+                                })
+                            }
+                        </select>
+                    :   ''
                 }   
-            </select>
             
             <select name="owner" className='FiltersContainer__select' onChange={e=> filtersChange(e.target)}>
                 <option value="">Dueño</option>
