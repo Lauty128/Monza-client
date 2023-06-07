@@ -1,5 +1,5 @@
 //------- Dependencies
-import create from 'zustand';
+import { create } from 'zustand';
 
 //------- Models
 import { usersInterface, marksInterface } from '@/models/services.model';

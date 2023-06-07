@@ -2,7 +2,7 @@
 import { get_vehicles } from '@/services/vehicles.service';
 
 //------- Dependencies
-import create from 'zustand';
+import { create } from 'zustand';
 
 //------- Models
 import { vehicleBasicInterface, filtersInterface, paginationInterface } from '@/models';
