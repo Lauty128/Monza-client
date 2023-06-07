@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { MessageBox, Header } from "@/components";
 
 //----- Components
-import { Filters } from "./components";
+import { Filters, VehiclesSection } from "./components";
 
 export default function MainLayout(){
 
@@ -13,7 +13,7 @@ export default function MainLayout(){
     
           <main className='Main'>
               <Filters />
-              {/* <VehiclesSection /> */}
+              <VehiclesSection />
 
               <Outlet /> {/* Here the boxes are loaded  */}
           </main>
