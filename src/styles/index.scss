@@ -344,11 +344,39 @@
         font-size: 1.6em;
     }
 
+    .VehicleBox{
+        &__mainDataContainer{  width: 85% }
+        &__bottomContainer{ width: 90%; }
+    }
 }
+
+
 
 @media screen and (max-width:620px){
     .Vehicle{
         width: 85%;
         &__imageContainer{ height: 14em; }
+    }
+}
+
+@media screen and (max-width:500px){
+    .Header{
+        padding: 0 .5em 0 0;
+        flex-wrap: wrap;
+        &__image{ width: 8em; }
+        &__option{ font-size: .8em; }
+    }
+
+    .VehicleBox{
+        &__arrow{ font-size: 1.7em; opacity: .7; }
+        &__mainDataContainer{ grid-template-columns: 1fr }
+        &__option{ font-size: .8em; }
+        &__price{ font-size: .8em; }
+    }
+}
+
+@media screen and (max-width:370px){
+    .VehicleBox{
+        &__bottomContainer{ gap: 1em; flex-direction: column-reverse; align-items: flex-start; }
     }
 }

@@ -52,6 +52,10 @@
         transform: scale(.05);
         transition: transform .3s ease-in;
         &--active{ transform: scale(1) }
+
+        @media screen and (max-width:750px) {
+            &{ width: 95%; }
+        }
     }
     
     &__loadingContainer{

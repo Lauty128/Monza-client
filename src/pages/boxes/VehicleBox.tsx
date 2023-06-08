@@ -106,7 +106,7 @@ export function VehicleBox(){
                         </span>
                         <span className="VehicleBox__mainData">Tipo: <b>{vehicle.type}</b></span>
                     </div>
-                    <h3 className='VehicleBox__h3'>Caracteristicas</h3>
+                    {/* <h3 className='VehicleBox__h3'>Caracteristicas</h3> */}
                     {/*
                         (vehicle.extra && vehicle.extra.length > 0) ?
                         <div className="VehicleBox__extraDataContainer">
