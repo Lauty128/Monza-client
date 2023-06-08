@@ -1,6 +1,7 @@
 export interface vehicleBasicInterface{
     id_vehicle: string
     version: string
+    fuel: string
     image: string
     mark: { 
         id_mark:number,
