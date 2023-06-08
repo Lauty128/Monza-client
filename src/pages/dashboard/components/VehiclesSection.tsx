@@ -34,7 +34,7 @@ export function VehiclesSection(){
                         {   
                         vehicles.map((vehicle=> <VehicleCard key={vehicle.id_vehicle}  vehicle={vehicle}/> )) 
                         }        
-                        { vehicles.length <= 3 ? arrayofthree.map(index=>(<div key={index}></div>) ) : '' }
+                        { ((vehicles.length <= 3) && (window.innerWidth > 1200)) ? arrayofthree.map(index=>(<div key={index}></div>) ) : '' }
                         
                         <Page />
                     </> 

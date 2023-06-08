@@ -90,7 +90,7 @@ export function Filters(){
         <form className='FiltersContainer' ref={formRef} onSubmit={e=> submitHandler(e)}>
             <div>
                 <label htmlFor="sortOption">Ordenar por: </label>
-                <select name="sort"  className='FiltersContainer__select' id="sortOption" onChange={e=> filtersChange(e.target)}>
+                <select name="order"  className='FiltersContainer__select' id="sortOption" onChange={e=> filtersChange(e.target)}>
                     <option value="">Predeterminado</option>
                     <option value="pUP">Precio: menor a mayor</option>
                     <option value="pDOWN">Precio: mayor a menor</option>

@@ -42,7 +42,7 @@
 //--------------------------------- VEHICLES SECTION -----------------------------------
 //--------------------------------------------------------------------------------------
 .Main__containerVehicles{
-    @include grid(repeat(auto-fit, minmax(17em,17em)), 1fr 1fr );
+    @include grid(repeat(3, 18em), 1fr 1fr );
     gap: 1em 1.5em;
     padding: 1.5em 1em;
 }
@@ -315,4 +315,40 @@
         padding: .5em;
     }  
     &__soldMessage{ font-weight: 700;  font-size: 1.7em; color: $info-color }
+}
+
+
+@media screen and (max-width:1200px){
+    .Main{
+        grid-template-columns: 1fr;   
+    
+        &__containerVehicles{
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+
+    .FiltersContainer{
+        padding: 1em 10%;
+
+        &__select{
+            padding: .3em;
+        }
+    }
+
+    .Vehicle{ width: 17em }
+
+    .HandlerPages{
+        width: 100%;
+        margin-top: 1em;
+        font-size: 1.6em;
+    }
+
+}
+
+@media screen and (max-width:620px){
+    .Vehicle{
+        width: 85%;
+        &__imageContainer{ height: 14em; }
+    }
 }
