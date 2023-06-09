@@ -4,7 +4,7 @@ import { marksInterface, marksResponseInterface,
 //------- Utils
 import { store_in_localStorage } from "@/utils/localStorage";
 
-const api_domain = 'http://localhost:4000'
+const api_domain =  import.meta.env.VITE_API_URL || ''
 
 export const get_users = async ():Promise<usersInterface[]>=>{
     const data:Promise<usersResponseInterface> = await fetch(`${api_domain}/api/users`).then(res => res.json())

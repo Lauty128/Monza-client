@@ -2,7 +2,7 @@
 import { filtersInterface, vehicleBasicInterface, vehicleCompleteInterface, vehiclesResponseInterface } from "@/models"
 
 
-const api_domain = 'http://localhost:4000'
+const api_domain =  import.meta.env.VITE_API_URL || ''
 
 interface paramsInterface{
     page?:Number

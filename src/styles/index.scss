@@ -133,7 +133,7 @@
 .UploadForm{
 
     &__form{
-        @include grid(repeat(4, 10em) , 7em repeat(6, 3em) 5em 2.5em , center, top);
+        @include grid(repeat(4, 10em) , 7em repeat(6, 3em) 2.5em , center, top);
         row-gap: 2em;
         column-gap: 1em;
     }
@@ -319,6 +319,7 @@
 
 
 @media screen and (max-width:1200px){
+    //---------- Main
     .Main{
         grid-template-columns: 1fr;   
     
@@ -328,6 +329,7 @@
         }
     }
 
+    //---------- Filters
     .FiltersContainer{
         padding: 1em 10%;
 
@@ -336,30 +338,50 @@
         }
     }
 
+    //---------- Vehicle card and Pagination
     .Vehicle{ width: 17em }
-
     .HandlerPages{
         width: 100%;
         margin-top: 1em;
         font-size: 1.6em;
     }
 
+    //---------- Vehicle Viewer
     .VehicleBox{
         &__mainDataContainer{  width: 85% }
         &__bottomContainer{ width: 90%; }
     }
 }
 
-
+@media screen and (max-width:950px){
+    //---------- Vehicle creator
+    .UploadForm{
+        &__form{
+            grid-template-columns: repeat(4, 1fr);
+            width: 90%;
+        }
+    }
+}
 
 @media screen and (max-width:620px){
+    //---------- Vehicle card
     .Vehicle{
         width: 85%;
         &__imageContainer{ height: 14em; }
     }
+
+    //---------- Vehicle creator
+    .UploadForm{
+        &__form{ grid-template-rows: 7em repeat(12, 3em) 2.5em; row-gap: 2em; }
+
+        &__inputContainer{ grid-column: 4 span; }
+        &__inputImageContainer{ grid-column: 2 span; width: 80%; }
+        &__inputImagesContainer{ grid-column: 2 span; margin-left: 0; justify-self: right; }
+    }
 }
 
 @media screen and (max-width:500px){
+    //---------- Header
     .Header{
         padding: 0 .5em 0 0;
         flex-wrap: wrap;
@@ -367,6 +389,7 @@
         &__option{ font-size: .8em; }
     }
 
+    //---------- Vehicle Viewer
     .VehicleBox{
         &__arrow{ font-size: 1.7em; opacity: .7; }
         &__mainDataContainer{ grid-template-columns: 1fr }
@@ -376,6 +399,7 @@
 }
 
 @media screen and (max-width:370px){
+    //---------- Vehicle Viewer
     .VehicleBox{
         &__bottomContainer{ gap: 1em; flex-direction: column-reverse; align-items: flex-start; }
     }
