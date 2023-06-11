@@ -180,6 +180,8 @@
       & > input{ display: none }
     }
     
+    &__inputImagesContainer > input{ display: none }
+    
     &__previewImageContainer{ 
         position: relative; 
         height: 100%; 
@@ -187,6 +189,11 @@
         box-shadow: 0px 0px 10px rgba(0,0,0,0.8);
     }
 
+    &__imagesSelected{
+        position: absolute;
+        top: 0px;
+        left: 90px;
+    }
     &__labelImage{
         background-color: $tertiary-color; 
         padding: .5em;
@@ -215,7 +222,7 @@
         object-fit: cover;
     }
     
-    &__inputImagesContainer{ grid-column: 3 span; margin-left: 2em; align-self: center }
+    &__inputImagesContainer{  grid-column: 3 span; margin-left: 2em;  align-self: center; position: relative; }
     
     /*---------------CONFIG */
     &__inputExtraContainer{ grid-column: 4 span }
@@ -376,7 +383,7 @@
 
         &__inputContainer{ grid-column: 4 span; }
         &__inputImageContainer{ grid-column: 2 span; width: 80%; }
-        &__inputImagesContainer{ grid-column: 2 span; margin-left: 0; justify-self: right; }
+        &__inputImagesContainer{ grid-column: 2 span; margin-left: 0 }
     }
 }
 
@@ -395,6 +402,11 @@
         &__mainDataContainer{ grid-template-columns: 1fr }
         &__option{ font-size: .8em; }
         &__price{ font-size: .8em; }
+    }
+    
+    //---------- Vehicle Creator
+    .UploadForm{
+        &__imagesSelected{ font-size: .8em; top: -30px; left: 10px; }
     }
 }
 

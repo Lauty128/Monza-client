@@ -15,6 +15,6 @@ export async function modifyVehicle(id:string, body:any){
 }
 
 export async function newVehicle(body:FormData){
-    return await axios.post(`${api_domain}`, body)
+    return await axios.post(`${api_domain}/api/vehicles`, body)
                     .then(data => data)
 }

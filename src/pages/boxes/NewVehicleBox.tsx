@@ -18,6 +18,7 @@ export function NewVehicleBox() {
     //------- Hooks and States
     const { marks, users } = useComplementaryStore()
     const [ image , setImage ] = useState<string | null>(null)
+    const [ images, setImages ] = useState<number | null>(null)
   
     //------- Functions
   
@@ -44,6 +45,7 @@ export function NewVehicleBox() {
       controller_of_request(async()=> await newVehicle(body), true)
   
       setImage(null)
+      setImages(null)
       form.reset()
       document.querySelectorAll(".UploadForm__label").forEach(label=>{
         if(!is_input_of_type_select((label.nextElementSibling as HTMLInputElement).name)){
@@ -59,7 +61,7 @@ export function NewVehicleBox() {
           <div className='UploadForm__inputImageContainer'>
             {
               !image
-              ? <label className='UploadForm__labelImage' htmlFor="input-image"><FaPlusCircle/> Add</label>
+              ? <label className='UploadForm__labelImage' htmlFor="input-image"><FaPlusCircle/> Imagen</label>
               : <div className="UploadForm__previewImageContainer">
                 <label className='UploadForm__labelImage UploadForm__labelImage--active' htmlFor="input-image"><FaPlusCircle/> Add</label>
                 <img src={image}  className='UploadForm__previewImage' />
@@ -71,13 +73,19 @@ export function NewVehicleBox() {
   
           <div className='UploadForm__inputImagesContainer'>
             {/* <label className={styles.UploadForm__label} htmlFor="input-images">Images</label> */}
-            <input id="input-images" type="file" name="images"
+            {
+              (images)
+              ? <span className="UploadForm__imagesSelected">{images} imagenes</span>
+              : ''
+            }
+            <label className='UploadForm__labelImage' htmlFor="input-images"><FaPlusCircle/> Extra</label>
+            <input id="input-images" type="file" name="images" onChange={e=> setImages(e.target.files?.length as number)}
             multiple accept="image/png, image/jpeg"/> 
           </div>
   
           <div className='UploadForm__inputContainer'>
             <label className='UploadForm__label UploadForm__label--active' htmlFor="input-mark">Marca</label>
-            <select name="mark" id="input-mark">
+            <select name="markIdMark" id="input-mark">
                 {
                     marks?.map(mark=> <option value={mark.id_mark} key={mark.id_mark}>{mark.name}</option> )
                 }
@@ -140,7 +148,7 @@ export function NewVehicleBox() {
   
           <div className='UploadForm__inputContainer'>
             <label className='UploadForm__label UploadForm__label--active' htmlFor="input-owner">Dueño</label>
-            <select name="owner" id="input-owner" >
+            <select name="userIdUser" id="input-owner" >
               {
                 users?.map(user => <option key={user.id_user} value={user.id_user}>{user.name + " " + user.subname}</option> )
               }

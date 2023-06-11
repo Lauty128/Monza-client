@@ -3,7 +3,7 @@
 
 
 //---- data
-const inputs_of_type_select = ["type","fuel","owner","mark"]
+const inputs_of_type_select = ["type","fuel","userIdUser","markIdMark"]
 
 export const is_input_of_type_select = (name:string) => inputs_of_type_select.includes(name)
 
@@ -12,11 +12,11 @@ export async function controller_of_request(cb:Function, load=false){
                 .classList.add("ContainerBoxes__loadingContainer--active")
     
     const response = await cb()
-    
+    console.log(response);
     if(response.status === 201 || response.status === 200){
         const data = response.data
         const type = data.error ? "ERROR" : "OK"
-        newMessage({ type, message:data.msg })
+        newMessage({ type, message:data.message })
     }
     
     if(load) (document.querySelector(".ContainerBoxes__loadingContainer") as HTMLDivElement)
