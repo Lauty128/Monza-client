@@ -42,7 +42,8 @@ export function NewVehicleBox() {
       const form = e.target as HTMLFormElement
       
       const body = new FormData(form)
-      controller_of_request(async()=> await newVehicle(body), true)
+
+      controller_of_request(async()=> newVehicle(body), true)
   
       setImage(null)
       setImages(null)
@@ -123,15 +124,25 @@ export function NewVehicleBox() {
           </div>
   
           <div className='UploadForm__inputContainer'>
-            <label className='UploadForm__label' htmlFor="input-transmission">Transmision</label>
-            <input id="input-transmission" type="text" name="transmission" autoComplete='off'
-            onFocus={e=> inputHandler(e.target)} onBlur={e=> inputHandler(e.target)} />
+            <label className='UploadForm__label UploadForm__label--active' htmlFor="input-transmission">Transmision</label>
+            <select  name="transmission" id="input-transmission">
+              <option value="Manual">Manual</option>
+              <option value="Automatica">Automatica</option>
+            </select>
+            {/* <input id="input-transmission" type="text" name="transmission" autoComplete='off'
+            onFocus={e=> inputHandler(e.target)} onBlur={e=> inputHandler(e.target)} /> */}
           </div> 
           
           <div className='UploadForm__inputContainer'>
-            <label className='UploadForm__label' htmlFor="input-traction">Traccion</label>
-            <input id="input-traction" type="text" name="traction"
-            onFocus={e=> inputHandler(e.target)} onBlur={e=> inputHandler(e.target)} />
+            <label className='UploadForm__label UploadForm__label--active' htmlFor="input-traction">Traccion</label>
+            {/* <input id="input-traction" type="text" name="traction"
+            onFocus={e=> inputHandler(e.target)} onBlur={e=> inputHandler(e.target)} /> */}
+            <select  name="traction" id="input-traction">
+              <option value="Normal">Normal</option>
+              <option value="4x2">4x2</option>
+              <option value="4x4">4x4</option>
+              <option value="Integral">Integral</option>
+            </select>
           </div>
   
           <div className='UploadForm__inputContainer'>
