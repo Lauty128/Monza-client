@@ -2,7 +2,7 @@
 import { filtersInterface, vehicleBasicInterface, vehicleCompleteInterface, vehiclesResponseInterface } from "@/models"
 
 
-const api_domain =  import.meta.env.VITE_API_URL || ''
+const api_domain =  import.meta.env.VITE_API_URL || 'https://monza-production.up.railway.app'
 
 interface paramsInterface{
     page?:Number

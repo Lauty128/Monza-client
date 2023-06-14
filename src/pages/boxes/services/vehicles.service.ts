@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 
-const api_domain =  import.meta.env.VITE_API_URL || ''
+const api_domain =  import.meta.env.VITE_API_URL || 'https://monza-production.up.railway.app/'
 
 export async function deleteVehicle(id:string){
     const data = await axios.delete(`${api_domain}/${id}`)
