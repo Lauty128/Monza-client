@@ -33,14 +33,15 @@ export function Filters(){
 
         (async()=>{
             //---- Marks and Users data defined
-            const marksData:marksInterface[] = localStorage.getItem('marks_list')
-            ? JSON.parse(localStorage.getItem('marks_list') || "")
-            : await get_marks()
+            const marksData:marksInterface[] = (JSON.parse(localStorage.getItem('marks_list') || `{"type":"test"}`).type == "test") 
+            ? await get_marks()
+            : JSON.parse(localStorage.getItem('marks_list') || "")
             stateChanges.setMarks(marksData)
 
-            const usersData = localStorage.getItem('users_list')
-            ? JSON.parse(localStorage.getItem('users_list') || "")
-            : await get_users()
+            const usersData = (JSON.parse(localStorage.getItem('users_list') || `{"type":"test"}`).type === "test")
+            ? await get_users()
+            : JSON.parse(localStorage.getItem('users_list') || "")
+            
             stateChanges.setUsers(usersData)
         })()
     }, [])
