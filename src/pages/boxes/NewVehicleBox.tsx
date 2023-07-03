@@ -6,7 +6,8 @@ import { useComplementaryStore } from "@/store/complementaryStore"
 import { FaPlusCircle } from 'react-icons/fa';
 
 //----------------- Utils
-import { is_input_of_type_select, controller_of_request, capture_image, cancel_form_submit_with_enter } from "./utils/controller.utils"
+import { is_input_of_type_select, capture_image, cancel_form_submit_with_enter } from "./utils/controller.utils"
+import { newMessage } from "@/utils/box-effects";
 
 //----------------- Services
 import { newVehicle } from "."
@@ -43,7 +44,10 @@ export function NewVehicleBox() {
       
       const body = new FormData(form)
 
-      controller_of_request(async()=> newVehicle(body), true)
+      const response =  await newVehicle(body)
+      if(response.data) newMessage({ type:"ERROR", message:response.data.message })
+      else newMessage({ type:"OK", message:response.data.message })
+
   
       setImage(null)
       setImages(null)

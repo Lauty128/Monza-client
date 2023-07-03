@@ -1,22 +1,33 @@
 //---- Services
 import { get_vehicle } from "@/services/vehicles.service"
+import { deleteVehicle } from "./services"
 
 //---- Dependencies
 import { useState, useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
-import { FaAngleLeft, FaAngleRight, /*FaTimesCircle,*/ 
+import { FaAngleLeft, FaAngleRight, FaDownload, /*FaTimesCircle,*/ 
 FaPen, FaTrashAlt/*, FaRegCheckCircle*/} from 'react-icons/fa'
+import axios from "axios"
+import fileDownload from "js-file-download"
 
 //---- Models
-import { vehicleBasicInterface, vehicleCompleteInterface } from "@/models"
+import { vehicleCompleteInterface } from "@/models"
+
+//---- Utils
+import { newMessage } from "@/utils/box-effects"
+
+//---- States
+import { useVehiclesStore } from "@/store/vehiclesStore"
+
 
 
 export function VehicleBox(){
-    //------- Hooks
+    //------- Hooks and states
     const { id } = useParams()
-    const [ vehicle , setVehicle ] = useState<vehicleBasicInterface & vehicleCompleteInterface | null>(null)
+    const [ vehicle , setVehicle ] = useState<vehicleCompleteInterface | null>(null)
     const [ slider, setSlider ] = useState<string[]>([])
     const [ imageNum, setImageNum ] = useState<number>(0)
+    const { setVehicles } = useVehiclesStore()
 
     useEffect(()=>{
         (async()=>{
@@ -35,14 +46,14 @@ export function VehicleBox(){
     }, [])
 
     //------- Functions
-    function optionsSection(data:vehicleBasicInterface & vehicleCompleteInterface){
+    function optionsSection(data:vehicleCompleteInterface){
         return (
             <>
                 <div className="VehicleBox__optionsContainer">
                     <Link className="VehicleBox__option" to={`/vehicle/edit/${data.id_vehicle}`}>
                         <FaPen /> Editar
                     </Link>
-                    <Link className="VehicleBox__option" to={'/'}>
+                    <Link to={'/'} className="VehicleBox__option" style={{cursor:'pointer'}} onClick={()=> buttonDelete(data.id_vehicle)}>
                         <FaTrashAlt /> Eliminar
                     </Link>
                 </div>
@@ -57,11 +68,24 @@ export function VehicleBox(){
             )
     }
 
+    async function downloadImage(){
+        axios.get(slider[imageNum], {
+            responseType: 'blob',
+        })
+        .then((res) => {
+            fileDownload(res.data, `${vehicle?.mark.name}-${vehicle?.version}--${imageNum + 1}.jpg`)
+        })
+          
+    }
 
-    // async function buttonDelete(id:){ 
-    //     controller_of_request(async()=> await deleteVehicle(id)) 
-    //     getNewPage()
-    // }
+
+    async function buttonDelete(id:string){ 
+        const response = await deleteVehicle(id)
+
+        if(response.data) newMessage({ type:"ERROR", message:response.data.message })
+        else newMessage({ type:"OK", message:response.data.message })
+        await setVehicles(0)
+    }
 
     function handlerSlider(num:number){
         const length = slider.length
@@ -78,9 +102,9 @@ export function VehicleBox(){
         <>
             <div className="VehicleBox__imagesContainer">
                 <div className="VehicleBox__image">
-                    {/* <a href={slider[imageNum]} download className="VehicleBox__downloadImage">
+                    <span className="VehicleBox__downloadImage" style={{cursor:'pointer'}} onClick={()=> downloadImage()}>
                         <FaDownload />
-                    </a> */}
+                    </span>
                     <img src={slider[imageNum]} /> 
                 </div>
                 <FaAngleLeft className="VehicleBox__arrow VehicleBox__arrow--left"
