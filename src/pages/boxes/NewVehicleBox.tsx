@@ -39,15 +39,21 @@ export function NewVehicleBox() {
     }
   
     async function submitHandler(e:FormEvent<HTMLFormElement>){
-      e.preventDefault()
-      const form = e.target as HTMLFormElement
+      e.preventDefault();
+      const form = e.target as HTMLFormElement;
+      const body = new FormData(form);
       
-      const body = new FormData(form)
+      (document.querySelector(".ContainerBoxes__loadingContainer") as HTMLDivElement)
+                .classList.add("ContainerBoxes__loadingContainer--active");
 
-      const response =  await newVehicle(body)
-      if(response.data) newMessage({ type:"ERROR", message:response.data.message })
-      else newMessage({ type:"OK", message:response.data.message })
+      const response =  await newVehicle(body);
+      console.log(response);
 
+      if(response && response.status == 201) newMessage({ type:"OK", message:response.message })
+      else newMessage({ type:"ERROR", message:response.message });
+
+      (document.querySelector(".ContainerBoxes__loadingContainer") as HTMLDivElement)
+                .classList.remove("ContainerBoxes__loadingContainer--active")
   
       setImage(null)
       setImages(null)

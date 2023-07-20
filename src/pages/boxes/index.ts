@@ -1,3 +1,4 @@
+export * from './EditVehicleBox';
 export { default as Layout } from './Layout';
 export * from './NewVehicleBox';
 export * from './VehicleBox';

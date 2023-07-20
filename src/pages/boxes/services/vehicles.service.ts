@@ -9,8 +9,9 @@ export async function deleteVehicle(id:string){
     return data
 }
 
-export async function modifyVehicle(id:string, body:any){
-    const data = await axios.put(`${api_domain}/api/vehicles/${id}`, body)
+export async function modifyVehicle(id:string, body:FormData){
+    const data = await axios.put(`${api_domain}/api/vehicles/${id}`, { price: body.get('price'), traction: body.get('traction') })
+        .then(res => res.data).catch(error => error)
     return data
 }
 

@@ -139,7 +139,7 @@
     }
 
     //-------- Edit Box -------
-        &__form--edit{ grid-template-rows: repeat(6, 3em) 5em 2.5em }
+        &__form--edit{ grid-template-rows: repeat(6, 3em) 2.5em }
         &__div--edit{ display: flex; gap: .7em; align-items: flex-start; margin-bottom: 2em }
         &__image--edit{ width: 5em; box-shadow: -1px 1px 7px rgba(0,0,0,0.8) }
     //-------------------------
@@ -315,6 +315,7 @@
         padding: .5em;
 
         &:nth-child(2), &:nth-child(3){ margin-left: 1em; }
+        &:hover{ color: #535bf2 }
     }
     &__price{
         font-weight: 800;
