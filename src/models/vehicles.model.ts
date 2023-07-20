@@ -4,7 +4,7 @@ export interface vehicleBasicInterface{
     fuel: string
     image: string
     mark: { 
-        id_mark:number,
+        id_mark:string,
         name: string 
     }
     model: number
@@ -14,7 +14,7 @@ export interface vehicleBasicInterface{
     userIdUser: string
 }
 
-export interface vehicleCompleteInterface{
+export interface vehicleCompleteInterface extends vehicleBasicInterface{
     extra_images: string | null
     engine: string
     km: number
