@@ -9,11 +9,12 @@
 
 //----- States
     import { useComplementaryStore } from '@/store/complementaryStore'
+    import { useVehiclesStore } from '@/store/vehiclesStore'
 
 //----- Services
     import { get_marks, get_users } from '@/services/data.service'
 
-//----- Services
+//----- Utils
     import { store_time_controller, clear_local_store } from '@/utils/localStorage'
 
 
@@ -21,6 +22,7 @@ export function Filters(){
     //----- States
     const { marks, users } = useComplementaryStore()
     const stateChanges = useComplementaryStore(state => ({ setMarks:state.setMarks, setUsers:state.setUsers }) )
+    const { changeFilters } = useVehiclesStore();
 
     //----- Hooks
     const [ localFilters, setLocalFilters ] = useState<filtersInterface | {}>({})
@@ -70,8 +72,10 @@ export function Filters(){
 
     //------- Form Handler
     async function submitHandler(e:FormEvent<HTMLFormElement>){
-        e.preventDefault()
-        //setFilters(localFilters)
+        e.preventDefault();
+        //const filters = filtersHandler(localFilters as { [key: string]: filtersInterface });
+        changeFilters(localFilters);
+        
     }
     
     async function resetHandler(e:FormEvent<HTMLButtonElement>){

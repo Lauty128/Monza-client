@@ -13,20 +13,25 @@ interface vehiclesStoreInterface{
     pagination: paginationInterface
 
     setVehicles: (page:number) => Promise<void>
+    changeFilters: (filters:filtersInterface) => void
 }
 
-export const useVehiclesStore = create<vehiclesStoreInterface>((set) => ({
+export const useVehiclesStore = create<vehiclesStoreInterface>((set,get) => ({
     vehicles: null,
     filters: {},
     pagination: { size:6, page:0, total:0 },
 
-    setVehicles: async(page:number)=>{
-        const data = await get_vehicles({ page })
+    setVehicles: async(page)=>{
+        const data = await get_vehicles({ page, where: get().filters })
         set(state=>({
             pagination: { ...state.pagination, page, total:data.total },
             vehicles: data.data
         }))
     },
 
+    changeFilters: (filters:filtersInterface) =>{
+        set(()=> ({ filters }));
+        get().setVehicles(0);
+    },
     changePage: (newPage:paginationInterface) => set(() => ({ pagination: newPage }))
 }))
