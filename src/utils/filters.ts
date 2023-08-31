@@ -13,6 +13,6 @@ export default function filtersHandler(filters:{ [key: string]: filtersInterface
         if(filter === undefined) return
         filtersString += `${filter.name}=${filter.value}&`
     })
-
+    
     return `&${filtersString.slice(0,filtersString.length - 1)}`
 }

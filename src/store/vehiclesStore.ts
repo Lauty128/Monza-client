@@ -9,7 +9,7 @@ import { vehicleBasicInterface, filtersInterface, paginationInterface } from '@/
 
 interface vehiclesStoreInterface{
     vehicles: vehicleBasicInterface[] | null
-    filters: filtersInterface | {}
+    filters: { [key: string]: filtersInterface } | {}
     pagination: paginationInterface
 
     setVehicles: (page:number) => Promise<void>

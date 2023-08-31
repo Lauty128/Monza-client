@@ -13,9 +13,12 @@ interface paramsInterface{
 }
 
 export const get_vehicles = async ({ page=0, size=6, where }:paramsInterface):Promise<vehiclesResponseInterface>=>{
-    const filters = where ? filtersHandler(where) : '';
-    const data:Promise<vehiclesResponseInterface> = await fetch(`${api_domain}/api/vehicles?page=${page}&size=${size}&${filters}`).then(res => res.json())
+    // const filters = where ? filtersHandler(where) : '';
+    const filters = (Object.values((where as Object)).length > 0) 
+                        ? filtersHandler((where as { [key: string]: filtersInterface })) 
+                        : '';
 
+    const data:Promise<vehiclesResponseInterface> = await fetch(`${api_domain}/api/vehicles?page=${page}&size=${size}&${filters}`).then(res => res.json())
     return data
 }
 

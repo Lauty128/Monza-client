@@ -36,7 +36,7 @@ export interface vehiclesResponseInterface{
 }
 
 export interface filtersInterface{
-    order?: string
+    sort?: string
     mark?: string
     owner?: number
     fuel?: string
