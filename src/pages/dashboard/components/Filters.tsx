@@ -15,7 +15,7 @@
     import { get_marks, get_users } from '@/services/data.service'
 
 //----- Utils
-    import { store_time_controller, clear_local_store } from '@/utils/localStorage'
+    //import { store_time_controller, clear_local_store } from '@/utils/localStorage'
 
 
 export function Filters(){
@@ -30,20 +30,15 @@ export function Filters(){
     
     useEffect(()=>{
 
-        if(!store_time_controller('marks_list')){ clear_local_store('marks_list') }
-        if(!store_time_controller('users_list')){ clear_local_store('users_list') }
+        //if(!store_time_controller('marks_list')){ clear_local_store('marks_list') }
+        //if(!store_time_controller('users_list')){ clear_local_store('users_list') }
 
         (async()=>{
             //---- Marks and Users data defined
-            const marksData:marksInterface[] = (JSON.parse(localStorage.getItem('marks_list') || `{"type":"test"}`).type == "test") 
-            ? await get_marks()
-            : JSON.parse(localStorage.getItem('marks_list') || "")
+            const marksData:marksInterface[] = await get_marks()
             stateChanges.setMarks(marksData)
 
-            const usersData = (JSON.parse(localStorage.getItem('users_list') || `{"type":"test"}`).type === "test")
-            ? await get_users()
-            : JSON.parse(localStorage.getItem('users_list') || "")
-            
+            const usersData = await get_users()
             stateChanges.setUsers(usersData)
         })()
     }, [])

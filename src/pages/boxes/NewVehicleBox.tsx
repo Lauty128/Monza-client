@@ -188,13 +188,6 @@ export function NewVehicleBox() {
             onFocus={e=> inputHandler(e.target)} onBlur={e=> inputHandler(e.target)} />
           </div>
   
-          {/* <div className='UploadForm__inputContainer UploadForm__inputExtraContainer'>
-              <label className='UploadForm__label UploadForm__label--textarea' htmlFor="input-price">Extra</label>
-              <textarea name="extra" id="input-extra" cols={30} rows={10} 
-              onFocus={e=> inputHandler(e.target)} onBlur={e=> inputHandler(e.target)}>
-              </textarea>
-          </div> */}
-  
           <input id="input-" type="submit" value="ENVIAR" className='UploadForm__submitButton' />
         </form>
     )
